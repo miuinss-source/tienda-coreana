@@ -162,6 +162,26 @@
 }
 
 .comprar-boton:hover {
+    .checkout-intro {
+    color: #888888;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+#checkout-ventana input {
+    width: 100%;
+    padding: 13px;
+    margin-bottom: 12px;
+    border: 1px solid #e5f2f5;
+    border-radius: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    outline: none;
+}
+
+#checkout-ventana input:focus {
+    border-color: #a9dce9;
+}
     background-color: #8fcddd;
 }
 
@@ -439,13 +459,38 @@
         <div class="carrito-total">
             Total: $<span id="total-carrito">0</span>
         </div>
-
-        <button class="comprar-boton">
-            Finalizar compra
-        </button>
+<button class="comprar-boton" onclick="mostrarCheckout()">
+    Finalizar compra
+</button>
     </div>
 </div>
+<div id="checkout-ventana" class="carrito-ventana">
 
+    <div class="carrito-contenido">
+
+        <button class="cerrar-carrito" onclick="cerrarCheckout()">×</button>
+
+        <h2>Finalizar compra</h2>
+
+        <p class="checkout-intro">
+            Completá tus datos para continuar con tu pedido.
+        </p>
+
+        <input type="text" id="nombre-cliente" placeholder="Nombre y apellido">
+
+        <input type="email" id="email-cliente" placeholder="Email">
+
+        <input type="text" id="telefono-cliente" placeholder="Teléfono">
+
+        <input type="text" id="direccion-cliente" placeholder="Dirección de entrega">
+
+        <button class="comprar-boton" onclick="confirmarPedido()">
+            Continuar
+        </button>
+
+    </div>
+
+</div>
     <!-- INICIO -->
 
     <section class="hero" id="inicio">
@@ -677,6 +722,36 @@ localStorage.setItem("carritoKealy", JSON.stringify(carrito));
     }
 
     function cerrarCarrito() {
+        function mostrarCheckout() {
+
+    if (carrito.length === 0) {
+        alert("Tu carrito está vacío 🛒");
+        return;
+    }
+
+    document.getElementById("carrito-ventana").style.display = "none";
+    document.getElementById("checkout-ventana").style.display = "block";
+}
+
+function cerrarCheckout() {
+
+    document.getElementById("checkout-ventana").style.display = "none";
+}
+
+function confirmarPedido() {
+
+    let nombre = document.getElementById("nombre-cliente").value;
+    let email = document.getElementById("email-cliente").value;
+    let telefono = document.getElementById("telefono-cliente").value;
+    let direccion = document.getElementById("direccion-cliente").value;
+
+    if (!nombre || !email || !telefono || !direccion) {
+        alert("Por favor completá todos los datos.");
+        return;
+    }
+
+    alert("¡Datos guardados! 💗 Ahora podemos pasar al pago.");
+}
 
         document.getElementById("carrito-ventana").style.display = "none";
     }
