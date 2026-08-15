@@ -581,7 +581,7 @@
 
     </footer>
 <script>
-    let carrito = [];
+  let carrito = JSON.parse(localStorage.getItem("carritoKealy")) || [];
 
     function agregarAlCarrito(nombre, precio) {
 
@@ -603,7 +603,7 @@
     }
 
     function actualizarCarrito() {
-
+localStorage.setItem("carritoKealy", JSON.stringify(carrito));
         let cantidadTotal = 0;
         let total = 0;
 
