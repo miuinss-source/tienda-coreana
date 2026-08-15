@@ -424,7 +424,70 @@
     font-size: 16px;
     margin-left: 8px;
 }
+.checkout-contenido {
+    max-height: 85vh;
+    overflow-y: auto;
+}
 
+.checkout-contenido label {
+    display: block;
+    text-align: left;
+    font-size: 13px;
+    color: #555555;
+    margin-bottom: 6px;
+}
+
+.checkout-contenido input {
+    width: 100%;
+    padding: 13px;
+    margin-bottom: 15px;
+    border: 1px solid #e5f2f5;
+    border-radius: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    outline: none;
+}
+
+.checkout-contenido input:focus {
+    border-color: #a9dce9;
+}
+
+.metodo-pago {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.metodo-pago > p {
+    text-align: left;
+    font-size: 13px;
+    color: #555555;
+    margin-bottom: 8px;
+}
+
+.mercadopago-opcion {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+    border: 1px solid #a9dce9;
+    border-radius: 14px;
+    background-color: #f7fcfd;
+}
+
+.mercadopago-opcion span {
+    font-size: 24px;
+}
+
+.mercadopago-opcion strong {
+    display: block;
+    font-size: 14px;
+    color: #444444;
+}
+
+.mercadopago-opcion small {
+    color: #999999;
+    font-size: 12px;
+}
         /* CELULAR */
 
         @media (max-width: 700px) {
@@ -488,26 +551,47 @@
 </div>
 <div id="checkout-ventana" class="carrito-ventana">
 
-    <div class="carrito-contenido">
+    <div class="carrito-contenido checkout-contenido">
 
         <button class="cerrar-carrito" onclick="cerrarCheckout()">×</button>
 
         <h2>Finalizar compra</h2>
 
         <p class="checkout-intro">
-            Completá tus datos para continuar con tu pedido.
+            Completá tus datos para preparar tu pedido ♡
         </p>
 
-        <input type="text" id="nombre-cliente" placeholder="Nombre y apellido">
+        <label>Nombre y apellido</label>
+        <input type="text" id="nombre-cliente" placeholder="Tu nombre">
 
-        <input type="email" id="email-cliente" placeholder="Email">
+        <label>Email</label>
+        <input type="email" id="email-cliente" placeholder="tuemail@gmail.com">
 
-        <input type="text" id="telefono-cliente" placeholder="Teléfono">
+        <label>Teléfono</label>
+        <input type="text" id="telefono-cliente" placeholder="11 1234-5678">
 
-        <input type="text" id="direccion-cliente" placeholder="Dirección de entrega">
+        <label>Dirección de entrega</label>
+        <input type="text" id="direccion-cliente" placeholder="Calle y número">
+
+        <div class="metodo-pago">
+
+            <p>Método de pago</p>
+
+            <div class="mercadopago-opcion">
+
+                <span>💳</span>
+
+                <div>
+                    <strong>Mercado Pago</strong>
+                    <small>Pago seguro</small>
+                </div>
+
+            </div>
+
+        </div>
 
         <button class="comprar-boton" onclick="confirmarPedido()">
-            Continuar
+            Continuar con Mercado Pago
         </button>
 
     </div>
