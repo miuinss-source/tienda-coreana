@@ -162,7 +162,29 @@
 }
 
 .comprar-boton:hover {
-    .checkout-intro {
+    background-color: #8fcddd;
+}
+
+.checkout-intro {
+    color: #888888;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+#checkout-ventana input {
+    width: 100%;
+    padding: 13px;
+    margin-bottom: 12px;
+    border: 1px solid #e5f2f5;
+    border-radius: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    outline: none;
+}
+
+#checkout-ventana input:focus {
+    border-color: #a9dce9;
+}
     color: #888888;
     font-size: 14px;
     margin-bottom: 20px;
@@ -626,117 +648,141 @@
 
     </footer>
 <script>
-  let carrito = JSON.parse(localStorage.getItem("carritoKealy")) || [];
 
-    function agregarAlCarrito(nombre, precio) {
+let carrito = JSON.parse(localStorage.getItem("carritoKealy")) || [];
 
-        let productoExistente = carrito.find(function(producto) {
-            return producto.nombre === nombre;
+function agregarAlCarrito(nombre, precio) {
+
+    let productoExistente = carrito.find(function(producto) {
+        return producto.nombre === nombre;
+    });
+
+    if (productoExistente) {
+        productoExistente.cantidad++;
+    } else {
+        carrito.push({
+            nombre: nombre,
+            precio: precio,
+            cantidad: 1
         });
-
-        if (productoExistente) {
-            productoExistente.cantidad++;
-        } else {
-            carrito.push({
-                nombre: nombre,
-                precio: precio,
-                cantidad: 1
-            });
-        }
-
-        actualizarCarrito();
     }
 
-    function actualizarCarrito() {
-localStorage.setItem("carritoKealy", JSON.stringify(carrito));
-        let cantidadTotal = 0;
-        let total = 0;
+    actualizarCarrito();
+}
 
-        carrito.forEach(function(producto) {
-            cantidadTotal += producto.cantidad;
-            total += producto.precio * producto.cantidad;
-        });
 
-        document.getElementById("cantidad-carrito").textContent = cantidadTotal;
+function actualizarCarrito() {
 
-        let lista = document.getElementById("lista-carrito");
+    localStorage.setItem("carritoKealy", JSON.stringify(carrito));
 
-        lista.innerHTML = "";
+    let cantidadTotal = 0;
+    let total = 0;
 
-        carrito.forEach(function(producto, index) {
+    carrito.forEach(function(producto) {
+        cantidadTotal += producto.cantidad;
+        total += producto.precio * producto.cantidad;
+    });
 
-            lista.innerHTML += `
-                <div class="producto-carrito">
+    document.getElementById("cantidad-carrito").textContent = cantidadTotal;
 
-                    <div>
-                        <strong>${producto.nombre}</strong>
-                        <br>
-                        $${producto.precio.toLocaleString("es-AR")}
-                    </div>
+    let lista = document.getElementById("lista-carrito");
 
-                    <div>
-                      <button class="cantidad-boton" onclick="cambiarCantidad(${index}, -1)">−</button>
+    lista.innerHTML = "";
 
-<span style="margin: 0 10px;">
-    ${producto.cantidad}
-</span>
+    carrito.forEach(function(producto, index) {
 
-<button class="cantidad-boton" onclick="cambiarCantidad(${index}, 1)">+</button>
+        lista.innerHTML += `
+            <div class="producto-carrito">
 
-<button class="eliminar-boton" onclick="eliminarProducto(${index})">
-    🗑️
-</button>
-                    </div>
+                <div>
+                    <strong>${producto.nombre}</strong>
+                    <br>
+                    $${producto.precio.toLocaleString("es-AR")}
+                </div>
+
+                <div>
+
+                    <button class="cantidad-boton" onclick="cambiarCantidad(${index}, -1)">
+                        −
+                    </button>
+
+                    <span style="margin: 0 10px;">
+                        ${producto.cantidad}
+                    </span>
+
+                    <button class="cantidad-boton" onclick="cambiarCantidad(${index}, 1)">
+                        +
+                    </button>
+
+                    <button class="eliminar-boton" onclick="eliminarProducto(${index})">
+                        🗑️
+                    </button>
 
                 </div>
-            `;
-        });
 
-        document.getElementById("total-carrito").textContent =
-            total.toLocaleString("es-AR");
-    }
+            </div>
+        `;
+    });
 
-    function cambiarCantidad(index, cambio) {
+    document.getElementById("total-carrito").textContent =
+        total.toLocaleString("es-AR");
+}
 
-        carrito[index].cantidad += cambio;
 
-        if (carrito[index].cantidad <= 0) {
-            carrito.splice(index, 1);
-        }
+function cambiarCantidad(index, cambio) {
 
-        actualizarCarrito();
-    }
+    carrito[index].cantidad += cambio;
 
-    function eliminarProducto(index) {
-
+    if (carrito[index].cantidad <= 0) {
         carrito.splice(index, 1);
-
-        actualizarCarrito();
     }
 
-    function mostrarCarrito() {
+    actualizarCarrito();
+}
 
-        document.getElementById("carrito-ventana").style.display = "block";
 
-        actualizarCarrito();
-    }
+function eliminarProducto(index) {
 
-    function cerrarCarrito() {
-        function mostrarCheckout() {
+    carrito.splice(index, 1);
+
+    actualizarCarrito();
+}
+
+
+function mostrarCarrito() {
+
+    document.getElementById("carrito-ventana").style.display = "block";
+
+    actualizarCarrito();
+}
+
+
+function cerrarCarrito() {
+
+    document.getElementById("carrito-ventana").style.display = "none";
+}
+
+
+function mostrarCheckout() {
 
     if (carrito.length === 0) {
+
         alert("Tu carrito está vacío 🛒");
+
         return;
     }
 
     document.getElementById("carrito-ventana").style.display = "none";
+
     document.getElementById("checkout-ventana").style.display = "block";
 }
+
 
 function cerrarCheckout() {
 
     document.getElementById("checkout-ventana").style.display = "none";
 }
+
 
 function confirmarPedido() {
 
@@ -746,18 +792,22 @@ function confirmarPedido() {
     let direccion = document.getElementById("direccion-cliente").value;
 
     if (!nombre || !email || !telefono || !direccion) {
+
         alert("Por favor completá todos los datos.");
+
         return;
     }
 
     alert("¡Datos guardados! 💗 Ahora podemos pasar al pago.");
 }
 
-        document.getElementById("carrito-ventana").style.display = "none";
-    }
-    window.addEventListener("DOMContentLoaded", function() {
+
+window.addEventListener("DOMContentLoaded", function() {
+
     actualizarCarrito();
+
 });
+
 </script>
 </body>
 </html>
