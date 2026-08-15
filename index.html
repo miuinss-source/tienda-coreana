@@ -468,29 +468,66 @@
     let carrito = [];
 
     function agregarAlCarrito(nombre, precio) {
-        carrito.push({
-            nombre: nombre,
-            precio: precio
+
+        let productoExistente = carrito.find(function(producto) {
+            return producto.nombre === nombre;
         });
+
+        if (productoExistente) {
+            productoExistente.cantidad++;
+        } else {
+            carrito.push({
+                nombre: nombre,
+                precio: precio,
+                cantidad: 1
+            });
+        }
 
         actualizarCarrito();
     }
 
     function actualizarCarrito() {
-        document.getElementById("cantidad-carrito").textContent = carrito.length;
+
+        let cantidadTotal = 0;
+        let total = 0;
+
+        carrito.forEach(function(producto) {
+            cantidadTotal += producto.cantidad;
+            total += producto.precio * producto.cantidad;
+        });
+
+        document.getElementById("cantidad-carrito").textContent = cantidadTotal;
 
         let lista = document.getElementById("lista-carrito");
-        let total = 0;
 
         lista.innerHTML = "";
 
         carrito.forEach(function(producto, index) {
-            total += producto.precio;
 
             lista.innerHTML += `
                 <div class="producto-carrito">
-                    <span>${producto.nombre}</span>
-                    <span>$${producto.precio.toLocaleString("es-AR")}</span>
+
+                    <div>
+                        <strong>${producto.nombre}</strong>
+                        <br>
+                        $${producto.precio.toLocaleString("es-AR")}
+                    </div>
+
+                    <div>
+                        <button onclick="cambiarCantidad(${index}, -1)">−</button>
+
+                        <span style="margin: 0 10px;">
+                            ${producto.cantidad}
+                        </span>
+
+                        <button onclick="cambiarCantidad(${index}, 1)">+</button>
+
+                        <button onclick="eliminarProducto(${index})"
+                            style="margin-left: 10px;">
+                            🗑️
+                        </button>
+                    </div>
+
                 </div>
             `;
         });
@@ -499,11 +536,33 @@
             total.toLocaleString("es-AR");
     }
 
+    function cambiarCantidad(index, cambio) {
+
+        carrito[index].cantidad += cambio;
+
+        if (carrito[index].cantidad <= 0) {
+            carrito.splice(index, 1);
+        }
+
+        actualizarCarrito();
+    }
+
+    function eliminarProducto(index) {
+
+        carrito.splice(index, 1);
+
+        actualizarCarrito();
+    }
+
     function mostrarCarrito() {
+
         document.getElementById("carrito-ventana").style.display = "block";
+
+        actualizarCarrito();
     }
 
     function cerrarCarrito() {
+
         document.getElementById("carrito-ventana").style.display = "none";
     }
 </script>
