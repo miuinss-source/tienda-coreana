@@ -61,6 +61,75 @@
 .carrito-boton:hover {
     background-color: #8fcddd;
 }
+        .carrito-ventana {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.25);
+    z-index: 1000;
+}
+
+.carrito-contenido {
+    background-color: white;
+    width: 380px;
+    max-width: 90%;
+    padding: 30px;
+    border-radius: 20px;
+    position: absolute;
+    right: 30px;
+    top: 90px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+}
+
+.carrito-contenido h2 {
+    margin-top: 0;
+    font-weight: 400;
+}
+
+.cerrar-carrito {
+    position: absolute;
+    right: 18px;
+    top: 15px;
+    border: none;
+    background: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #777;
+}
+
+.producto-carrito {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #edf7f9;
+    font-size: 14px;
+}
+
+.carrito-total {
+    font-weight: bold;
+    margin-top: 20px;
+    font-size: 17px;
+}
+
+.comprar-boton {
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    border: none;
+    border-radius: 25px;
+    background-color: #a9dce9;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.comprar-boton:hover {
+    background-color: #8fcddd;
+}
         /* HERO */
 
         .hero {
@@ -243,7 +312,23 @@
 </nav>
 
     </header>
+<div id="carrito-ventana" class="carrito-ventana">
+    <div class="carrito-contenido">
+        <button class="cerrar-carrito" onclick="cerrarCarrito()">×</button>
 
+        <h2>Tu carrito 🛒</h2>
+
+        <div id="lista-carrito"></div>
+
+        <div class="carrito-total">
+            Total: $<span id="total-carrito">0</span>
+        </div>
+
+        <button class="comprar-boton">
+            Finalizar compra
+        </button>
+    </div>
+</div>
 
     <!-- INICIO -->
 
@@ -389,31 +474,37 @@
         });
 
         actualizarCarrito();
-
-        alert(nombre + " se agregó al carrito 🛒");
     }
 
     function actualizarCarrito() {
         document.getElementById("cantidad-carrito").textContent = carrito.length;
+
+        let lista = document.getElementById("lista-carrito");
+        let total = 0;
+
+        lista.innerHTML = "";
+
+        carrito.forEach(function(producto, index) {
+            total += producto.precio;
+
+            lista.innerHTML += `
+                <div class="producto-carrito">
+                    <span>${producto.nombre}</span>
+                    <span>$${producto.precio.toLocaleString("es-AR")}</span>
+                </div>
+            `;
+        });
+
+        document.getElementById("total-carrito").textContent =
+            total.toLocaleString("es-AR");
     }
 
     function mostrarCarrito() {
-        if (carrito.length === 0) {
-            alert("Tu carrito está vacío 🛒");
-            return;
-        }
+        document.getElementById("carrito-ventana").style.display = "block";
+    }
 
-        let mensaje = "🛒 TU CARRITO\n\n";
-        let total = 0;
-
-        carrito.forEach(function(producto, index) {
-            mensaje += (index + 1) + ". " + producto.nombre + " - $" + producto.precio.toLocaleString("es-AR") + "\n";
-            total += producto.precio;
-        });
-
-        mensaje += "\nTOTAL: $" + total.toLocaleString("es-AR");
-
-        alert(mensaje);
+    function cerrarCarrito() {
+        document.getElementById("carrito-ventana").style.display = "none";
     }
 </script>
 </body>
