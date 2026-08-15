@@ -3,158 +3,347 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Tienda Coreana 🇰🇷</title>
+
+    <title>Kealy | Korean Skincare</title>
 
     <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #fff7fb;
-            color: #333;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #ffffff;
+            color: #333333;
         }
+
+        /* NAVBAR */
 
         header {
-            background-color: #f7b6d2;
-            text-align: center;
-            padding: 30px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #eaf6fa;
+            padding: 22px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        header h1 {
-            margin: 0;
-            color: white;
-            font-size: 40px;
-        }
-
-        header p {
-            color: white;
-            font-size: 18px;
-        }
-
-        nav {
-            background-color: white;
-            text-align: center;
-            padding: 15px;
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            color: #9bd8e8;
         }
 
         nav a {
-            margin: 0 15px;
             text-decoration: none;
-            color: #d85b91;
-            font-weight: bold;
+            color: #555555;
+            margin-left: 30px;
+            font-size: 14px;
         }
 
-        .inicio {
+        nav a:hover {
+            color: #8acbdc;
+        }
+
+        /* HERO */
+
+        .hero {
+            background-color: #f2fbfd;
             text-align: center;
-            padding: 60px 20px;
+            padding: 100px 20px;
         }
 
-        .inicio h2 {
-            font-size: 32px;
-            color: #d85b91;
+        .hero h1 {
+            font-size: 52px;
+            font-weight: 400;
+            margin-bottom: 15px;
+            color: #333333;
         }
+
+        .hero p {
+            font-size: 18px;
+            color: #777777;
+            margin-bottom: 35px;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #a9dce9;
+            color: white;
+            padding: 14px 32px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .button:hover {
+            background-color: #8fcddd;
+        }
+
+        /* PRODUCTOS */
 
         .productos {
-            padding: 40px 20px;
+            padding: 80px 8%;
             text-align: center;
         }
 
         .productos h2 {
-            color: #d85b91;
+            font-size: 30px;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+
+        .productos-intro {
+            color: #888888;
+            margin-bottom: 50px;
+        }
+
+        .contenedor-productos {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
         }
 
         .producto {
-            display: inline-block;
-            background-color: white;
-            width: 250px;
-            margin: 15px;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 280px;
+            background-color: #ffffff;
+            border: 1px solid #edf7f9;
+            border-radius: 16px;
+            padding: 25px;
+            transition: 0.3s;
         }
 
-        .producto .imagen {
+        .producto:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(160, 220, 235, 0.2);
+        }
+
+        .producto-imagen {
+            background-color: #f2fbfd;
+            height: 230px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 70px;
-            padding: 20px;
+            margin-bottom: 20px;
         }
 
         .producto h3 {
-            color: #d85b91;
+            font-size: 17px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .producto p {
+            color: #888888;
+            font-size: 14px;
         }
 
         .precio {
-            font-size: 20px;
+            color: #6eb9cc !important;
             font-weight: bold;
+            font-size: 16px !important;
         }
 
-        button {
-            background-color: #d85b91;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 20px;
-            cursor: pointer;
+        /* SOBRE KEALY */
+
+        .sobre {
+            background-color: #f7fcfd;
+            padding: 80px 20%;
+            text-align: center;
         }
+
+        .sobre h2 {
+            font-size: 30px;
+            font-weight: 400;
+        }
+
+        .sobre p {
+            color: #777777;
+            line-height: 1.8;
+        }
+
+        /* FOOTER */
 
         footer {
-            background-color: #f7b6d2;
-            color: white;
+            background-color: #ffffff;
+            border-top: 1px solid #edf7f9;
             text-align: center;
-            padding: 25px;
-            margin-top: 40px;
+            padding: 35px;
+            color: #999999;
+            font-size: 13px;
         }
+
+        /* CELULAR */
+
+        @media (max-width: 700px) {
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .sobre {
+                padding: 60px 30px;
+            }
+        }
+
     </style>
 </head>
 
 <body>
 
+    <!-- NAVBAR -->
+
     <header>
-        <h1>🇰🇷 Mi Tienda Coreana</h1>
-        <p>Productos coreanos que te van a encantar ♡</p>
+
+        <div class="logo">
+            KEALY
+        </div>
+
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#productos">Productos</a>
+            <a href="#sobre">Nosotros</a>
+        </nav>
+
     </header>
 
-    <nav>
-        <a href="#inicio">Inicio</a>
-        <a href="#productos">Productos</a>
-        <a href="#contacto">Contacto</a>
-    </nav>
 
-    <section class="inicio" id="inicio">
-        <h2>¡Bienvenid@! ♡</h2>
-        <p>Descubrí nuestros productos favoritos de Corea.</p>
+    <!-- INICIO -->
+
+    <section class="hero" id="inicio">
+
+        <h1>Tu ritual de skincare.</h1>
+
+        <p>
+            Korean skincare, seleccionado para vos.
+        </p>
+
+        <a href="#productos" class="button">
+            Ver productos
+        </a>
+
     </section>
+
+
+    <!-- PRODUCTOS -->
 
     <section class="productos" id="productos">
-        <h2>✨ Productos destacados ✨</h2>
 
-        <div class="producto">
-            <div class="imagen">🧴</div>
-            <h3>Producto coreano 1</h3>
-            <p>Descripción del producto.</p>
-            <p class="precio">$10.000</p>
-            <button>Comprar</button>
-        </div>
+        <h2>Productos destacados</h2>
 
-        <div class="producto">
-            <div class="imagen">🍜</div>
-            <h3>Producto coreano 2</h3>
-            <p>Descripción del producto.</p>
-            <p class="precio">$8.000</p>
-            <button>Comprar</button>
-        </div>
+        <p class="productos-intro">
+            Descubrí nuestra selección de skincare coreano.
+        </p>
 
-        <div class="producto">
-            <div class="imagen">🎀</div>
-            <h3>Producto coreano 3</h3>
-            <p>Descripción del producto.</p>
-            <p class="precio">$12.000</p>
-            <button>Comprar</button>
+
+        <div class="contenedor-productos">
+
+
+            <div class="producto">
+
+                <div class="producto-imagen">
+                    🧴
+                </div>
+
+                <h3>Limpiador facial</h3>
+
+                <p>
+                    Limpieza suave para tu rutina diaria.
+                </p>
+
+                <p class="precio">
+                    $10.000
+                </p>
+
+            </div>
+
+
+            <div class="producto">
+
+                <div class="producto-imagen">
+                    💧
+                </div>
+
+                <h3>Serum hidratante</h3>
+
+                <p>
+                    Hidratación profunda y piel luminosa.
+                </p>
+
+                <p class="precio">
+                    $15.000
+                </p>
+
+            </div>
+
+
+            <div class="producto">
+
+                <div class="producto-imagen">
+                    🫧
+                </div>
+
+                <h3>Crema hidratante</h3>
+
+                <p>
+                    Una textura ligera para todos los días.
+                </p>
+
+                <p class="precio">
+                    $18.000
+                </p>
+
+            </div>
+
+
         </div>
 
     </section>
 
-    <footer id="contacto">
-        <p>♡ Gracias por visitar nuestra tienda ♡</p>
-        <p>Instagram: @mitiendacoreana</p>
+
+    <!-- SOBRE KEALY -->
+
+    <section class="sobre" id="sobre">
+
+        <h2>Sobre Kealy</h2>
+
+        <p>
+            En Kealy creemos que el skincare puede ser
+            simple, efectivo y un momento para vos.
+            Seleccionamos productos de skincare coreano
+            para acompañarte en tu rutina diaria.
+        </p>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 Kealy — Korean Skincare
+        </p>
+
+        <p>
+            Instagram · Contacto
+        </p>
+
     </footer>
 
 </body>
