@@ -217,7 +217,7 @@
     <header>
 
         <div class="logo">
-            KY
+            SKINCARE
         </div>
 
         <nav>
@@ -276,6 +276,9 @@
 <p class="precio">
     $47.500
 </p>
+                <button onclick="agregarAlCarrito('Dr. Althea - Crema 345 Relief', 47500)">
+    Añadir al carrito
+</button>
 
             </div>
 
@@ -292,9 +295,13 @@
                     Calma la irritación, reduce las rojeces, hidrata sin dejar sensación pesada y fortalece la barrera cutánea.
                 </p>
 
-                <p class="precio">
-                    $55.450
-                </p>
+              <p class="precio">
+    $55.450
+</p>
+
+<button onclick="agregarAlCarrito('SKIN1004 - Crema calmante Madagascar Centella Soothing Cream', 55450)">
+    Añadir al carrito
+</button>
 
             </div>
 
@@ -311,9 +318,13 @@
                     Hidrata a profundidad, calma la piel irritada, mejora la textura irregular y fortalece la barrera cutánea.
                 </p>
 
-                <p class="precio">
-                    $67.449
-                </p>
+               <p class="precio">
+    $67.449
+</p>
+
+<button onclick="agregarAlCarrito('Mixsoon Bean Essence', 67449)">
+    Añadir al carrito
+</button>
 
             </div>
 
@@ -352,6 +363,17 @@
         </p>
 
     </footer>
+<script>
+    let carrito = [];
 
+    function agregarAlCarrito(nombre, precio) {
+        carrito.push({
+            nombre: nombre,
+            precio: precio
+        });
+
+        alert(nombre + " se agregó al carrito 🛒");
+    }
+</script>
 </body>
 </html>
