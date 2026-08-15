@@ -488,6 +488,45 @@
     color: #999999;
     font-size: 12px;
 }
+        .resumen-pedido {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 18px;
+    background-color: #f7fcfd;
+    border-radius: 14px;
+}
+
+.resumen-pedido h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: left;
+}
+
+.resumen-producto {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 10px 0;
+    border-bottom: 1px solid #e5f2f5;
+    font-size: 13px;
+    text-align: left;
+}
+
+.resumen-producto small {
+    display: block;
+    color: #999999;
+    margin-top: 3px;
+}
+
+.resumen-total {
+    margin-top: 15px;
+    text-align: right;
+    font-size: 17px;
+    font-weight: bold;
+    color: #444444;
+}
         /* CELULAR */
 
         @media (max-width: 700px) {
@@ -869,8 +908,43 @@ function mostrarCheckout() {
     document.getElementById("carrito-ventana").style.display = "none";
 
     document.getElementById("checkout-ventana").style.display = "block";
-}
 
+
+    let resumen = document.getElementById("resumen-checkout");
+
+    let total = 0;
+
+    resumen.innerHTML = "";
+
+
+    carrito.forEach(function(producto) {
+
+        let subtotal = producto.precio * producto.cantidad;
+
+        total += subtotal;
+
+        resumen.innerHTML += `
+            <div class="resumen-producto">
+
+                <span>
+                    ${producto.nombre}
+                    <small>x${producto.cantidad}</small>
+                </span>
+
+                <strong>
+                    $${subtotal.toLocaleString("es-AR")}
+                </strong>
+
+            </div>
+        `;
+
+    });
+
+
+    document.getElementById("total-checkout").textContent =
+        total.toLocaleString("es-AR");
+
+}
 
 function cerrarCheckout() {
 
